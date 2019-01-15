@@ -13,8 +13,9 @@ const rules = [
   [/((\n\*.+)+)/g, `<ul ${style}>$1</ul>`],
   [/\n\d\.([^\n]+)/g, `<li ${style}>$1</li>`],
   [/\n\*([^\n]+)/g, `<li ${style}>$1</li>`],
+  // [/^`{3}.*\n(.+)\n`{3}\n$/gm, `<pre ${style}><code>$1</code></pre>`],
+  [/\n(```[a-z]*\n[\s\S]*?\n```)/g, `<pre><code>$1</code></pre>`], //Bug
   [/`(.*?)`/g, "<code>$1</code>"],
-  [/(\n```[a-z]*\n[\s\S]*?\n```)/g, `<pre>$1</pre>`],
   [/(&gt;|>)(.*)/g, `<blockquote ${style}>$2</blockquote>`],
   [
     (/!\[([^\])+)\](([^)]+)s"([^")]+)"\)/g,
