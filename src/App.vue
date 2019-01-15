@@ -17,7 +17,7 @@
         </div>
         <!-- <div id="markdown">
         </div>-->
-        <textarea v-model="markdown" id="markdown"></textarea>
+        <textarea v-model="markdown" ref="markdown"></textarea>
       </div>
 
       <div>
@@ -55,9 +55,10 @@ export default {
       document.body.removeChild(element);
     },
     triggerDownload: function() {
+      let markdown = this.$refs.markdown;
       if (markdown.value != "") {
         let text = markdown.value;
-        let filename = "generatedFile.md";
+        let filename = "newfile.md";
 
         this.download(filename, text);
       } else {
@@ -109,9 +110,6 @@ textarea {
   border: 1px solid black;
   border-radius: 5px;
   overflow-y: auto;
-}
-
-#markdown {
 }
 
 #preview {
