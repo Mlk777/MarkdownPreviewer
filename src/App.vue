@@ -1,7 +1,9 @@
 <template>
   <div class="app">
     <div class="title">
-      <h1>Markdown Previewer</h1>
+      <h1>
+        <u>Markdown Previewer</u>
+      </h1>
     </div>
     <button type="button" id="download-button" @click="triggerDownload()">
       Download file
@@ -11,7 +13,7 @@
       >
     </button>
     <div class="container">
-      <div>
+      <div class="text-container">
         <div class="subtitle">
           <h2>markdown</h2>
         </div>
@@ -20,7 +22,7 @@
         <textarea v-model="markdown" ref="markdown"></textarea>
       </div>
 
-      <div>
+      <div class="text-container">
         <div class="subtitle">
           <h2>preview</h2>
         </div>
@@ -37,6 +39,10 @@ export default {
     return {
       markdown: ""
     };
+  },
+  mounted: function() {
+    document.body.style.margin = 0;
+    document.body.style.overflow = "hidden";
   },
   methods: {
     download: function(filename, text) {
@@ -70,6 +76,11 @@ export default {
 </script>
 
 <style scoped>
+body {
+  margin: 0;
+  background: blue;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -78,62 +89,100 @@ export default {
 
 .app {
   overflow: hidden;
+  height: 100vh;
+  background: #757f9a; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #d7dde8,
+    #757f9a
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #d7dde8,
+    #757f9a
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 .title {
-  font-size: calc(24px + 0.5vw);
+  font-size: 1.5rem;
   margin: 10px 0 50px 0;
   text-align: center;
+  letter-spacing: 0.2em;
 }
 
 .subtitle {
-  font-size: calc(18px + 0.5vw);
+  font-size: 1.2em;
   text-align: center;
+  text-transform: capitalize;
 }
 
 .container {
   overflow: hidden;
-  height: 100%;
+  /* height: 100%; */
   display: grid;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   /* align-items: center; */
   /* grid-gap: 50px; */
   grid-template-columns: 1fr 1fr;
 }
 
+.text-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-self: center;
+}
+
 textarea {
   resize: none;
   /* outline: none; */
-  height: 600px;
+  flex: 1;
+  min-height: 500px;
   padding-left: 2px;
-  width: 48vw;
-  font-size: calc(14px + 0.5vw);
+  width: 40vw;
+  font-size: 1.3em;
   border: 1px solid black;
   border-radius: 5px;
   overflow-y: auto;
+  max-height: fit-content;
 }
 
 #preview {
-  height: 600px;
+  flex: 1;
+  max-height: 500px;
   padding-left: 2px;
-  width: 48vw;
-  font-size: calc(16px + 0.5vw);
+  width: 40vw;
+  font-size: 1.4em;
   border: 1px solid black;
+  background: white;
   border-radius: 5px;
   overflow-y: auto;
+  border-left: 1px solid #0000000d;
 }
 
 #download-button {
-  position: fixed;
+  position: absolute;
   display: flex;
   align-items: center;
   top: 20px;
   right: 20px;
   height: auto;
   width: auto;
+  font-size: 1em;
   padding: 5px;
   border-radius: 5px;
-  background-color: blue;
   border: 1px solid black;
+  background: #2c3e50; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #3498db,
+    #2c3e50
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #3498db,
+    #2c3e50
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 #button-image {
@@ -144,5 +193,15 @@ textarea {
 
 button:focus {
   outline: none;
+}
+
+@media screen and (max-width: 1200px) {
+  textarea {
+    min-width: 50vw;
+  }
+
+  #preview {
+    min-width: 50vw;
+  }
 }
 </style>
